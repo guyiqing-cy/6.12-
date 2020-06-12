@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6.12作业</title>
+    <link rel="stylesheet" href="css/点击焦点换图.css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div id="list">
+            <img src="images/01.png" alt="" class="pic">
+            <img src="images/02.png" alt="" class="pic">
+            <img src="images/03.png" alt="" class="pic">
+            <img src="images/04.png" alt="" class="pic">
+            <img src="images/05.png" alt="" class="pic">
+        </div>
+        <button id="prev"></button>
+        <button id="next"></button>
+        <div id="btns">
+            <span class="current"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var index = 0;
+            // 1.点击next
+            $("#next").click(function () {
+                index++;
+                if (index > 4) {
+                    index = 0;
+                }
+                animate(index);
+            })
+            // 2.点击prev
+            $("#prev").click(function () {
+                index--;
+                console.log(index);
+                if (index < 0) {
+                    index = 4;
+                }
+                animate(index);
+            })
+            // 3.焦点随左右按钮变化
+            function animate(index) {
+                $("#list img").eq(index).fadeIn(300).siblings().fadeOut(300);
+                $("#btns span").eq(index).addClass("current").siblings().removeClass("current");
+            }
+            // 4.点击按钮,让对应的图片出现
+            $("#btns span").click(function(){
+                $(this).addClass("current").siblings().removeClass("current");
+                index = $(this).index();
+                $("#list img").eq(index).fadeIn(300).siblings().fadeOut(300);
+                
+            })
+        })
+    </script>
+</body>
+
+</html>
